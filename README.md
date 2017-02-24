@@ -1,7 +1,7 @@
 # vuejs-countdown
 A simple countdown timer component for vue js 2.0
 
-![screenshot](scr.png "Vue JS Countdown")
+![screenshot](https://raw.githubusercontent.com/getanwar/vuejs-countdown/master/scr.png "Vue JS Countdown")
 
 ## Installation
 #### npm
