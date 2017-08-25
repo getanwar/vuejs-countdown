@@ -40,7 +40,7 @@ export default {
         }
     },
     mounted() {
-        this.date = Math.trunc(Date.parse(this.deadline) / 1000)
+        this.date = Math.trunc(Date.parse(this.deadline.replace(/-/g, "/")) / 1000)
 
         interval = setInterval(() => {
             this.now = Math.trunc((new Date()).getTime() / 1000)
