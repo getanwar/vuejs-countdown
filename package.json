@@ -1,6 +1,6 @@
 {
   "name": "vuejs-countdown",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A simple countdown timer component for vue js 2.0",
   "main": "Countdown.vue",
   "scripts": {},
