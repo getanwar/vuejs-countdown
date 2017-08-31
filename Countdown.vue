@@ -69,42 +69,45 @@ export default {
     }
 }
 </script>
-<style lang="sass" rel="stylesheet/sass">
-.vue-countdown
-  padding: 0
-  margin: 0
-
-  li
-    display: inline-block
-    margin: 0 8px
-    text-align: center
-    position: relative
-
-    &:after
-        content: ':'
-        position: absolute
-        top: 0
-        right: -13px
-        font-size: 32px
-
-    &:first-of-type
-      margin-left: 0
-
-    &:last-of-type
-      margin-right: 0
-
-      &:after
-        content: ''
-
-  .digit
-      font-size: 32px
-      font-weight: 600
-      line-height: 1.4
-      margin-bottom: 0
-
-  .text
-      text-transform: uppercase
-      margin-bottom: 0
-      font-size: 10px
-
+<style>
+.vue-countdown {
+  padding: 0;
+  margin: 0;
+}
+.vue-countdown li {
+  display: inline-block;
+  margin: 0 8px;
+  text-align: center;
+  position: relative;
+}
+.vue-countdown li p {
+    margin: 0;
+}
+.vue-countdown li:after {
+  content: ":";
+  position: absolute;
+  top: 0;
+  right: -13px;
+  font-size: 32px;
+}
+.vue-countdown li:first-of-type {
+  margin-left: 0;
+}
+.vue-countdown li:last-of-type {
+  margin-right: 0;
+}
+.vue-countdown li:last-of-type:after {
+  content: "";
+}
+.vue-countdown .digit {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+.vue-countdown .text {
+  text-transform: uppercase;
+  margin-bottom: 0;
+  font-size: 10px;
+}
 </style>
