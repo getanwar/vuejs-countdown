@@ -25,6 +25,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "prepare": "npm run build"
   },
+  "files": [
+    "dist/vuejs-countdown.js"
+  ],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
