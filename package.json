@@ -1,6 +1,6 @@
 {
   "name": "vuejs-countdown",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple countdown timer component for vue js 2.0",
   "main": "dist/vuejs-countdown.js",
   "repository": {
