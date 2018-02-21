@@ -1,16 +1,16 @@
 <template>
-    <ul class="vue-countdown">
-        <li>
+    <ul class="vuejs-countdown">
+        <li v-if="days > 0">
             <p class="digit">{{ days | twoDigits }}</p>
-            <p class="text">days</p>
+            <p class="text">{{ days > 1 ? 'days' : 'day' }}</p>
         </li>
         <li>
             <p class="digit">{{ hours | twoDigits }}</p>
-            <p class="text">hours</p>
+            <p class="text">{{ hours > 1 ? 'hours' : 'hour' }}</p>
         </li>
         <li>
             <p class="digit">{{ minutes | twoDigits }}</p>
-            <p class="text">Min</p>
+            <p class="text">min</p>
         </li>
         <li>
             <p class="digit">{{ seconds | twoDigits }}</p>
@@ -20,18 +20,21 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
-Vue.filter('twoDigits', (value) => {
-    if ( value.toString().length <= 1 ) {
-        return '0'+value.toString()
-    }
-    return value.toString()
-})
 let interval = null;
 
 export default {
-    props: ['deadline', 'stop'],
+    name: 'vuejsCountDown',
+    props: {
+        deadline: {
+            type: String
+        },
+        end: {
+            type: String
+        },
+        stop: {
+            type: Boolean
+        }
+    },
     data() {
         return {
             now: Math.trunc((new Date()).getTime() / 1000),
@@ -39,14 +42,21 @@ export default {
             diff: 0
         }
     },
-    mounted() {
-        this.date = Math.trunc(Date.parse(this.deadline.replace(/-/g, "/")) / 1000)
+    created() {
+        if (!this.deadline && !this.end) {
+            throw new Error("Missing props 'deadline' or 'end'");
+        }
+
+        let endTime = this.deadline ? this.deadline : this.end;
+        this.date = Math.trunc(Date.parse(endTime.replace(/-/g, "/")) / 1000);
+
+        if (!this.date) {
+            throw new Error("Invalid props value, correct the 'deadline' or 'end'");
+        }
 
         interval = setInterval(() => {
-            this.now = Math.trunc((new Date()).getTime() / 1000)
-        }, 1000)
-
-        console.log(interval)
+            this.now = Math.trunc((new Date()).getTime() / 1000);
+        }, 1000);
     },
     computed: {
         seconds() {
@@ -66,7 +76,7 @@ export default {
         }
     },
     watch: {
-        now(value){
+        now(value) {
             this.diff = this.date - this.now;
             if(this.diff <= 0 || this.stop){
                 this.diff = 0;
@@ -74,46 +84,57 @@ export default {
                 clearInterval(interval);
             }
         }
+    },
+    filters: {
+        twoDigits(value) {
+            if ( value.toString().length <= 1 ) {
+                return '0'+value.toString()
+            }
+            return value.toString()
+        }
+    },
+    destroyed() {
+        clearInterval(interval);
     }
 }
 </script>
 <style>
-.vue-countdown {
+.vuejs-countdown {
   padding: 0;
   margin: 0;
 }
-.vue-countdown li {
+.vuejs-countdown li {
   display: inline-block;
   margin: 0 8px;
   text-align: center;
   position: relative;
 }
-.vue-countdown li p {
+.vuejs-countdown li p {
     margin: 0;
 }
-.vue-countdown li:after {
+.vuejs-countdown li:after {
   content: ":";
   position: absolute;
   top: 0;
   right: -13px;
   font-size: 32px;
 }
-.vue-countdown li:first-of-type {
+.vuejs-countdown li:first-of-type {
   margin-left: 0;
 }
-.vue-countdown li:last-of-type {
+.vuejs-countdown li:last-of-type {
   margin-right: 0;
 }
-.vue-countdown li:last-of-type:after {
+.vuejs-countdown li:last-of-type:after {
   content: "";
 }
-.vue-countdown .digit {
+.vuejs-countdown .digit {
   font-size: 32px;
   font-weight: 600;
   line-height: 1.4;
   margin-bottom: 0;
 }
-.vue-countdown .text {
+.vuejs-countdown .text {
   text-transform: uppercase;
   margin-bottom: 0;
   font-size: 10px;
