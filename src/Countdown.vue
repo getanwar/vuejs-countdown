@@ -1,6 +1,6 @@
 <template>
     <ul class="vuejs-countdown">
-        <li v-if="days > 0">
+        <li v-if="displayDays">
             <p class="digit">{{ days | twoDigits }}</p>
             <p class="text">{{ days > 1 ? 'days' : 'day' }}</p>
         </li>
@@ -33,7 +33,11 @@ export default {
         },
         stop: {
             type: Boolean
-        }
+        },
+        showZeroDays: {
+            type: Boolean,
+            default: false
+        },
     },
     data() {
         return {
@@ -73,6 +77,9 @@ export default {
 
         days() {
             return Math.trunc(this.diff / 60 / 60 / 24)
+        },
+        displayDays() {
+            return this.showZeroDays || this.days > 0
         }
     },
     watch: {
