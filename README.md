@@ -35,6 +35,15 @@ export default {
 
 You can stop the countdown timer anytime by passing `true` (Boolean) with `stop` props.
 
+You can decide whether to show the days when they are zero by passing `true` (Boolean) with `showZeroDays` props.
+
+Example:
+
+```
+<div class="days-remaining">
+    <Countdown :end="timerEnd" :showZeroDays="true"></Countdown>
+</div>
+```
 
 ### Caution 
 
