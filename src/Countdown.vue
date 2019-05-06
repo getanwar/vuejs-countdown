@@ -2,18 +2,18 @@
     <ul class="vuejs-countdown">
         <li v-if="days > 0">
             <p class="digit">{{ days | twoDigits }}</p>
-            <p class="text">{{ days > 1 ? 'days' : 'day' }}</p>
+            <p class="text">{{ days > 1 ? labels.days : labels.day }}</p>
         </li>
         <li>
             <p class="digit">{{ hours | twoDigits }}</p>
-            <p class="text">{{ hours > 1 ? 'hours' : 'hour' }}</p>
+            <p class="text">{{ hours > 1 ? labels.hours : labels.hour }}</p>
         </li>
         <li>
-            <p class="digit">{{ minutes | twoDigits }}</p>
+            <p class="digit">{{ labels.minutes | twoDigits }}</p>
             <p class="text">min</p>
         </li>
         <li>
-            <p class="digit">{{ seconds | twoDigits }}</p>
+            <p class="digit">{{ labels.seconds | twoDigits }}</p>
             <p class="text">Sec</p>
         </li>
     </ul>
@@ -33,6 +33,20 @@ export default {
         },
         stop: {
             type: Boolean
+        },
+        labels: {
+        type: Object,
+        required: false,
+        default: function () {
+                return {
+                day: 'Day',
+                days: 'Days',
+                hour: 'Hour',
+                hours: 'Hours',
+                minutes: 'Minutes',
+                seconds: 'Seconds'
+                }
+            }
         }
     },
     data() {
